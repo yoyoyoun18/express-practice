@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  <body class="grey-bg">
+    <div class="white-bg">
+      <% for (let i = 0; i < 글목록.length; i++){ %>
+      <div class="list-box" id="item-<%= 글목록[i]._id %>">
+        <h4>
+          <a href="/detail/<%= 글목록[i]._id %>"><%= 글목록[i].title %></a>
+        </h4>
+        <p><%= 글목록[i].content %></p>
+        <a href="/update/<%= 글목록[i]._id %>">수정</a>
+        <span class="delete" data-id="<%= 글목록[i]._id %>">🗑️</span>
+      </div>
+      <% } %>
+    </div>
+    <script>
+      document.querySelectorAll(".delete").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const docId = this.getAttribute("data-id");
+          fetch("/delete?docid=" + docId, {
+            method: "DELETE",
+          })
+            .then((r) => r.text())
+            .then((r) => {
+              document.getElementById("item-" + docId).style.display = "none";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

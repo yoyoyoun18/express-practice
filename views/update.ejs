@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form-box" action="/update" method="POST">
+      <h4>수정하기</h4>
+      <input name="id" style="display: none" value="<%= result._id %>" />
+      <input name="title" value="<%= result.title %>" />
+      <input name="content" value="<%= result.content %>" />
+      <button type="submit">전송</button>
+    </form>
+  </body>
+</html>
